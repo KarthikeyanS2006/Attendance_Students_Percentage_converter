@@ -52,12 +52,12 @@ Create an Excel file named `students.xlsx` with these columns:
 
 ### Step 4: Configure Email Settings
 
-Edit the email configuration in `email_sender.py`:
+Edit the email configuration in `Setings`:
 
 Email Configuration
 SENDER_EMAIL = "your-email@gmail.com"
 APP_PASSWORD = "your-16-digit-app-password"
-SMTP_SERVER = "smtp.gmail.com"
+
 
 
 
@@ -309,3 +309,4 @@ Python attendance tracker with email alerts
 
 
 Python desktop app for student attendance tracking with percentage calculation and email notifications
+
