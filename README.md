@@ -1,93 +1,311 @@
-# 🎓 Attendance Management System
-**Sethupathy Government Arts College, Ramanathapuram**
+# Student Attendance Percentage Calculator
 
-A comprehensive attendance tracking and management system built with Python and Tkinter, featuring automated email notifications, PDF report generation, and detailed analytics.
+A Python-based desktop application for calculating student attendance percentages with year/department group selection and automated email notifications for low attendance students.
 
-![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Status](https://img.shields.io/badge/status-production-success)
+![Python](https://img.shields.io/badge/python-3.7+-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+
+## Features
+
+- ✅ **Attendance Percentage Calculation**: Automatically calculate attendance percentage for individual students
+- 📊 **Year & Department Selection**: Filter and manage students by year and department groups
+- ⚠️ **Low Attendance Alerts**: Identify students below attendance threshold (e.g., 75%)
+- 📧 **Email Notifications**: Send automated email alerts to students with low attendance
+- 🖥️ **GUI Interface**: User-friendly Tkinter-based graphical interface
+- 💾 **Data Management**: Store and retrieve attendance records from Excel/CSV files
+- 📈 **Report Generation**: Generate attendance reports for analysis
+
+## Prerequisites
+
+- Python 3.7 or higher installed on your system
+- Basic knowledge of running Python scripts
+
+## Installation
+
+### Step 1: Clone the Repository
+
+
+git clone https://github.com/yourusername/Attendance_Students_Percentage_converter.git
+
+
+
+
+### Step 2: Install Required Libraries
+
+pip install pandas openpyxl tkinter smtplib
+
+
+Or install from requirements file:
+
+pip install -r requirements.txt
+
+
+
+### Step 3: Prepare Student Data File
+
+Create an Excel file named `students.xlsx` with these columns:
+
+| Roll Number | Name | Department | Year | Email | Total Days | Present Days |
+|-------------|------|------------|------|-------|------------|--------------|
+| 101 | John Doe | CSE | 3 | john@email.com | 100 | 85 |
+| 102 | Jane Smith | ECE | 2 | jane@email.com | 100 | 70 |
+
+### Step 4: Configure Email Settings
+
+Edit the email configuration in `email_sender.py`:
+
+Email Configuration
+SENDER_EMAIL = "your-email@gmail.com"
+APP_PASSWORD = "your-16-digit-app-password"
+SMTP_SERVER = "smtp.gmail.com"
+
+
+
+**Important**: For Gmail, generate an App Password from:  
+Google Account Settings → Security → 2-Step Verification → App Passwords
+
+## Usage
+
+### Running the Main Program
+
+python attendance_calculator.py
+
+
+
+The GUI window will open automatically.
+
+### Calculate Attendance Percentage
+
+1. **Select Department**: Choose department from dropdown (CSE, ECE, MECH, etc.)
+2. **Select Year**: Choose year group (1st Year, 2nd Year, 3rd Year)
+3. **Load Students**: Click "Load Students" button to display filtered students
+4. **View Percentages**: The system automatically calculates and displays attendance percentage
+
+**Formula used**: `Attendance % = (Present Days / Total Days) × 100`
+
+### Mark Daily Attendance
+
+1. Select the date using the date picker
+2. Select department and year group
+3. Mark each student as Present (P) or Absent (A)
+4. Click "Save Attendance" to update records
+
+### Send Email Notifications
+
+1. Click on "Low Attendance Alerts" button
+2. Set threshold percentage (default: 75%)
+3. System identifies students below threshold
+4. Review the list of students with low attendance
+5. Click "Send Email Notifications" to alert students
+
+**Email template includes**:
+- Student name and roll number
+- Current attendance percentage
+- Number of absent days
+- Reminder to improve attendance
+
+### View Reports
+
+1. Go to "Reports" tab
+2. Select date range or department filter
+3. Click "Generate Report"
+4. Export to Excel or PDF format
+
+## Application Interface
+
+### Main Dashboard
+
+- **Student List**: Shows all students with roll number, name, and percentage
+- **Filter Controls**: Department and Year dropdown menus
+- **Status Indicator**: Color-coded percentage display
+  - 🟢 Green: ≥75%
+  - 🟡 Yellow: 65-74%
+  - 🔴 Red: <65%
+
+### Buttons and Functions
+
+- **Load Students**: Refresh student list based on filters
+- **Calculate All**: Recalculate all attendance percentages
+- **Send Alerts**: Trigger email notifications for low attendance
+- **Export Data**: Save data to Excel file
+
+## Configuration
+
+Edit these settings in the code:
+Attendance Settings
+MINIMUM_ATTENDANCE = 75 # Threshold percentage
+TOTAL_WORKING_DAYS = 100 # Total class days per semester
+WARNING_THRESHOLD = 70 # Yellow warning level
+
+Departments
+DEPARTMENTS = ["CSE", "ECE", "MECH", "CIVIL", "EEE"]
+
+Years
+YEARS = ["1", "2", "3", "4"]
+
+
+
+## Troubleshooting
+
+### Email Not Sending
+
+- Check email credentials are correct
+- Use App Password, not regular Gmail password
+- Verify internet connection
+- Check spam folder if emails not received
+
+### Excel File Not Loading
+
+- Ensure `students.xlsx` is in the same folder as the Python script
+- Check file is not open in Excel while running program
+- Verify column names match exactly
+
+### GUI Not Opening
+
+- Install tkinter: `pip install tk`
+- For Linux: `sudo apt-get install python3-tk`
+- Restart computer after installation
+
+### Percentage Not Calculating
+
+- Ensure "Total Days" and "Present Days" columns have numeric values
+- Check for blank or zero values
+- Reload the Excel file
+
+## File Structure
+
+attendance-calculator/
+│
+├── attendance_calculator.py # Main application (GUI)
+├── email_sender.py # Email notification module
+├── students.xlsx # Student database
+├── attendance_records.xlsx # Daily attendance records
+├── requirements.txt # Python dependencies
+└── README.md # This documentation
+
+
+
+## Security Best Practices
+
+- ⚠️ Never share your email App Password
+- 🔒 Keep student data files secure
+- 💾 Backup Excel files regularly
+- 🔑 Use environment variables for sensitive data
+
+## Future Enhancements
+
+- [ ] SMS notifications using Twilio API
+- [ ] Parent email notifications
+- [ ] Biometric attendance integration
+- [ ] Cloud database sync with Firebase
+- [ ] Mobile app version using Flutter
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Support
+
+For questions or issues, please open an issue on GitHub or contact the maintainer.
+
+## Credits
+
+Developed for educational purposes at Sethupathy Government Arts College, Manamadurai.
+
+**Developer**: Karthikeyan  
+**Institution**: Sethupathy Government Arts College  
+**Location**: Manamadurai, Tamil Nadu, India
+
+## Quick Start Commands
+
+Install dependencies
+pip install pandas openpyxl tkinter
+
+Run the application
+python attendance_calculator.py
+
+Calculate attendance for specific department
+python attendance_calculator.py --department CSE --year 3
+
+
+
+## Screenshots
+
+_Add screenshots of your application here_
+
+## Acknowledgments
+
+- Thanks to all contributors
+- Inspired by the need for efficient attendance management systems
+- Built with Python and Tkinter
 
 ---
 
-## 📋 Table of Contents
-- [Features](#features)
-- [System Requirements](#system-requirements)
-- [Installation](#installation)
-- [First-Time Setup](#first-time-setup)
-- [How to Use](#how-to-use)
-- [Email Configuration](#email-configuration)
-- [Troubleshooting](#troubleshooting)
-- [Project Structure](#project-structure)
-- [Screenshots](#screenshots)
-- [FAQ](#faq)
-- [Credits](#credits)
+**⭐ If you find this project useful, please consider giving it a star!**
+requirements.txt File
+Create this file with the following content:
 
----
 
-## ✨ Features
+pandas>=1.3.0
+openpyxl>=3.0.0
+Additional GitHub Repository Setup Tips
+Repository Topics/Tags
+Add these topics to your GitHub repository for better discoverability :​
 
-### 📊 Core Features
-- **Student Management**: Add, update, delete, and search student records
-- **Attendance Tracking**: Calculate attendance percentage automatically
-- **Color-Coded Status System**:
-  - 🟢 **Good**: 75% and above
-  - 🟠 **Warning**: 60% to 74%
-  - 🔴 **Critical**: Below 60%
 
-### 📧 Email System
-- **Bulk Email Notifications**: Send attendance reports to multiple students
-- **Filter by Year**: 1st Year, 2nd Year, 3rd Year, or All
-- **Filter by Department**: All 12 college departments
-- **Filter by Status**: Good, Warning, Critical, or All
-- **Automatic PDF Attachment**: Each email includes a detailed PDF report
-- **Custom Messages**: Different email content based on attendance status
+python
+attendance-system
+education
+tkinter
+email-notifications
+student-management
+gui-application
+excel
+pandas
+college-management
+.gitignore File
+Create a .gitignore file to exclude sensitive data :​
 
-### 📄 Reporting
-- **PDF Report Generation**: Professional reports with college branding
-- **Export to CSV**: Export all data for external analysis
-- **Individual Reports**: Generate reports for specific students
-- **Bulk Reports**: Create reports for filtered groups
 
-### 📈 Analytics Dashboard
-- **Summary Statistics**: Total students, average attendance
-- **Status Distribution**: Count of Good, Warning, and Critical students
-- **Year-wise Distribution**: Student count across 3 years
-- **Department Statistics**: Count and average attendance per department
-- **Visual Progress Bars**: Easy-to-understand graphical representation
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
 
-### 🔒 Technical Features
-- **SQLite Database**: Reliable local data storage with WAL mode
-- **Database Lock Prevention**: Automatic retry mechanism with 30-second timeout
-- **Backup System**: Create database backups anytime
-- **Thread-Safe**: Handles concurrent operations safely
-- **Error Handling**: Comprehensive error messages and recovery
+# Data files
+students.xlsx
+attendance_records.xlsx
+*.csv
 
----
+# Config files with sensitive data
+config.py
+.env
 
-## 💻 System Requirements
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+Short Descriptions for Different Uses
+50 characters (for GitHub description field) :​
 
-### Minimum Requirements
-- **Operating System**: Windows 7/8/10/11, macOS 10.12+, or Linux
-- **Python**: Version 3.8 or higher
-- **RAM**: 2 GB minimum (4 GB recommended)
-- **Storage**: 100 MB free space
-- **Display**: 1024x768 resolution minimum (1280x800+ recommended)
 
-### Software Dependencies
-- Python 3.8+
-- tkinter (usually comes with Python)
-- reportlab (for PDF generation)
-- sqlite3 (comes with Python)
-- smtplib (comes with Python)
+Python attendance tracker with email alerts
+100 characters (extended version) :​
 
----
 
-## 🚀 Installation
-
-### Step 1: Install Python
-
-#### Windows:
-1. Download Python from [python.org](https://www.python.org/downloads/)
-2. Run installer and **CHECK** "Add Python to PATH"
-3. Click "Install Now"
-4. Verify installation:
+Python desktop app for student attendance tracking with percentage calculation and email notifications
